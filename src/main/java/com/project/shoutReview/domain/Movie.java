@@ -1,6 +1,7 @@
 package com.project.shoutReview.domain;
 
 
+import com.project.shoutReview.service.response.MovieResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,15 +35,16 @@ public class Movie implements Serializable {
     private Double rating;
 
 
+    @OneToMany(mappedBy="movie")
     private List<Review> reviews;
 
-//    public MovieResponse toMovieResponse(){
-//
-//        return MovieResponse.builder().genre(this.genre).title(this.title)
-//                .rating(this.rating).reviews(Review.toReviewResponse(this.review)).build();
-//
-//
-//    }
+    public MovieResponse toMovieResponse(){
+
+        return MovieResponse.builder().genre(this.genre).title(this.title)
+                .rating(this.rating).reviews(Review.toReviewResponse(this.reviews)).build();
+
+
+    }
 
 
 

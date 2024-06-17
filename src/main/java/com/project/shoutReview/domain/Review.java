@@ -2,6 +2,7 @@ package com.project.shoutReview.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.shoutReview.service.response.ReviewResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,7 +30,7 @@ public class Review {
 
     private String movieReview;
 
-    private double Rating;
+    private double rating;
 
 
     @ManyToOne
@@ -41,24 +42,24 @@ public class Review {
     private Date createdDate    ;
 
     @UpdateTimestamp
-    private Date updateDate;
+    private Date updatedDate;
 
 
-//    public static ReviewRespnse toReviewResponse(Review review){
-//
-//         return ReviewResponse.builder().review(review.movieReview
-//                 .rating(review.rating).build();
-//
-//    }
+    public static ReviewResponse toReviewResponse(Review review){
 
-//    public static List<ReviewResponse> toReviewResponse(List<Review> reviewList){
-//
-//        if(Objects.isNull(reviewList))
-//            return new ArrayList<>();
-//        else
-//            return reviewList.stream().map(Review::toReviewResponse).collect(Collectors.toList());
-//
-//    }
+         return ReviewResponse.builder().review(review.movieReview)
+                 .rating(review.rating).build();
+
+    }
+
+    public static List<ReviewResponse> toReviewResponse(List<Review> reviewList){
+
+        if(Objects.isNull(reviewList))
+            return new ArrayList<>();
+        else
+            return reviewList.stream().map(Review::toReviewResponse).collect(Collectors.toList());
+
+    }
 
 
 
